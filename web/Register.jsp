@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>注册表</title>
@@ -16,13 +17,13 @@
         <caption>请填写信息</caption>
         <tbody>
         <tr>
-            <td>用户名：<input type="text" name="username"/></td>
+            <td>用户名：<input type="text" name="username2"/></td>
         </tr>
         <tr>
-            <td>密&nbsp&nbsp&nbsp码：<input type="text" name="password"/></td>
+            <td>密&nbsp&nbsp&nbsp码：<input type="password" name="password2"/></td>
         </tr>
         <tr>
-            <td>确认密码：<input type="text" id="password2"/></td>
+            <td>确认密码：<input type="password" id="password3"/></td>
         </tr>
         <tr>
             <td>
@@ -38,13 +39,13 @@
 
             <td>
                 兴趣：
-                <input type="checkbox" name="hobbys"/>
+                <input type="checkbox" name="hobbys" value="游戏"/>
                 游戏
-                <input type="checkbox" name="hobbys"/>
+                <input type="checkbox" name="hobbys" value="电影"/>
                 电影
-                <input type="checkbox" name="hobbys"/>
+                <input type="checkbox" name="hobbys" value="旅游"/>
                 旅游
-                <input type="checkbox" name="hobbys"/>
+                <input type="checkbox" name="hobbys" value="工作"/>
                 工作
             </td>
         </tr>

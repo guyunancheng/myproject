@@ -6,9 +6,18 @@ public class Goods {
     private String goodsinfo_pic;
     private String goodsinfo_price;
     private String goodsinfo_descri;//描述
-    private String goodsinfo_stook;//库存
+    private int goodsinfo_stock;//库存
 
     public Goods() {
+    }
+
+    public Goods(int id, String goodsinfo_name, String goodsinfo_pic, String goodsinfo_price, String goodsinfo_descri, int goodsinfo_stock) {
+        this.id = id;
+        this.goodsinfo_name = goodsinfo_name;
+        this.goodsinfo_pic = goodsinfo_pic;
+        this.goodsinfo_price = goodsinfo_price;
+        this.goodsinfo_descri = goodsinfo_descri;
+        this.goodsinfo_stock = goodsinfo_stock;
     }
 
     public int getId() {
@@ -51,20 +60,11 @@ public class Goods {
         this.goodsinfo_descri = goodsinfo_descri;
     }
 
-    public String getGoodsinfo_stook() {
-        return goodsinfo_stook;
+    public int getGoodsinfo_stock() {
+        return goodsinfo_stock;
     }
 
-    public void setGoodsinfo_stook(String goodsinfo_stook) {
-        this.goodsinfo_stook = goodsinfo_stook;
-    }
-
-    public Goods(int id, String goodsinfo_name, String goodsinfo_pic, String goodsinfo_price, String goodsinfo_descri, String goodsinfo_stook) {
-        this.id = id;
-        this.goodsinfo_name = goodsinfo_name;
-        this.goodsinfo_pic = goodsinfo_pic;
-        this.goodsinfo_price = goodsinfo_price;
-        this.goodsinfo_descri = goodsinfo_descri;
-        this.goodsinfo_stook = goodsinfo_stook;
+    public void setGoodsinfo_stock(int goodsinfo_stock) {
+        this.goodsinfo_stock = goodsinfo_stock;
     }
 }

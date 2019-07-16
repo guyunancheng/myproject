@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="json">
+    <CLASSES>
+      <root url="jar://D:/work20190709/jar/json/jackson-databind-2.8.3.jar!/" />
+      <root url="jar://D:/work20190709/jar/json/jackson-annotations-2.8.3.jar!/" />
+      <root url="jar://D:/work20190709/jar/json/jackson-core-2.8.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

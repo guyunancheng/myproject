@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="jstl_1.25">
+    <CLASSES>
+      <root url="jar://D:/work20190709/jar/jstl/jstl1.2.5/taglibs-standard-jstlel-1.2.5.jar!/" />
+      <root url="jar://D:/work20190709/jar/jstl/jstl1.2.5/taglibs-standard-spec-1.2.5.jar!/" />
+      <root url="jar://D:/work20190709/jar/jstl/jstl1.2.5/taglibs-standard-impl-1.2.5.jar!/" />
+      <root url="jar://D:/work20190709/jar/jstl/jstl1.2.5/xalan-2.7.1.jar!/" />
+      <root url="jar://D:/work20190709/jar/jstl/jstl1.2.5/serializer-2.7.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

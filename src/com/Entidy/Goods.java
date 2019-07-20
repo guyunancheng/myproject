@@ -11,10 +11,32 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods(int id, String goodsinfo_name, String goodsinfo_pic, String goodsinfo_price, String goodsinfo_descri, int goodsinfo_stock) {
+    public Goods(int id) {
         this.id = id;
+    }
+
+    public Goods(String goodsinfo_name) {
+        this.goodsinfo_name = goodsinfo_name;
+    }
+
+    public Goods(String goodsinfo_name, String goodsinfo_price, String goodsinfo_descri, int goodsinfo_stock) {
+        this.goodsinfo_name = goodsinfo_name;
+        this.goodsinfo_price = goodsinfo_price;
+        this.goodsinfo_descri = goodsinfo_descri;
+        this.goodsinfo_stock = goodsinfo_stock;
+    }
+
+    public Goods(String goodsinfo_name, String goodsinfo_pic, String goodsinfo_price, String goodsinfo_descri, int goodsinfo_stock) {
         this.goodsinfo_name = goodsinfo_name;
         this.goodsinfo_pic = goodsinfo_pic;
+        this.goodsinfo_price = goodsinfo_price;
+        this.goodsinfo_descri = goodsinfo_descri;
+        this.goodsinfo_stock = goodsinfo_stock;
+    }
+
+    public Goods( String goodsinfo_name, String goodsinfo_price, String goodsinfo_descri, int goodsinfo_stock, int id) {
+        this.id = id;
+        this.goodsinfo_name = goodsinfo_name;
         this.goodsinfo_price = goodsinfo_price;
         this.goodsinfo_descri = goodsinfo_descri;
         this.goodsinfo_stock = goodsinfo_stock;

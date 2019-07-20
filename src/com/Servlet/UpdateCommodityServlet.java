@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
-@WebServlet (name="goodsServlet",urlPatterns="/goodsServlet")
-
-public class LoginGoodsServlet extends HttpServlet {
+@WebServlet(name = "UpdateCommodityServlet",urlPatterns = "/updatecommodityServlet")
+public class UpdateCommodityServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -25,24 +23,20 @@ public class LoginGoodsServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
-        String username1 = req.getParameter("username1");
-        String password1 = req.getParameter("password1");
-
-
-        UserGoodsDao userGoodsDao=new UserGoodsDao();
-        List<Object> list = userGoodsDao.approvePassword(username1,password1);
-
-        if (list.size()>=1){
-            req.setAttribute("msg",username1);
-            List<Goods> byGoods = userGoodsDao.findByGoods(null);
-            req.setAttribute("byGoods",byGoods);
-            req.getRequestDispatcher("CommodityJstl.jsp").forward(req,resp);
-
-        }else {
-            PrintWriter out = resp.getWriter();
-            out.println("<script type='text/javascript'>alert('账号或密码错误');location.href='Login.jsp';</script>");
-
+        //传入数据调用Dao里面的方法查询
+        int id =Integer.parseInt(req.getParameter("id")) ;
+        Goods goods3=new Goods(id);
+        UserGoodsDao ugd=new UserGoodsDao();
+        List<Goods> findGoodsByid
+                = ugd.findByGoods(goods3);
+        if (findGoodsByid!=null&&findGoodsByid.size()>0){
+            req.setAttribute("listid",findGoodsByid);
+            req.getRequestDispatcher("UpdateCommodity.jsp").forward(req,resp);
+        }else{
+            PrintWriter out=resp.getWriter();
+            out.print("商品已经空了滚吧");
         }
+
 
 
     }

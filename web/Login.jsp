@@ -10,13 +10,15 @@
 <head>
     <title>登录</title>
     <script type="text/javascript">
+
         function onshow1(){
             var username=document.getElementById("username").value;
             var password=document.getElementById("password").value;
             if (username==null||""==username.trim()||password==null||password.trim()==""){
                alert("账号密码不能为空")
+                return false;
             } else {
-                window.location.href="/goodsServlet";
+                return true;
             }
 
         }
@@ -26,10 +28,10 @@
     </script>
 </head>
 <body>
-<form action="/goodsServlet" method="post">
+<form action="/goodsServlet" method="post" onsubmit=" return onshow1()">
     用户名：<input type="text" name="username1" id="username"/><br/>
     密码：<input type="password" name="password1" id="password"/><br/>
-    <input type="submit" value="登录" />
+    <input type="submit" value="登录"/>
     <input type="button" value="注册" onclick="onshow2()"/>
 
 </form>

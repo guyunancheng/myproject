@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name ="userServlet",urlPatterns = "/userServlet")
 public class UserServlet extends HttpServlet {
@@ -30,14 +31,21 @@ public class UserServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
         String addrs = req.getParameter("addrs");
-        User use=new User(username,password,sex,hobbys,phone,email,addrs);
         UserGoodsDao userGoodsDao=new UserGoodsDao();
-        int row=userGoodsDao.insertUser(use);
-        if(row>0){
-//           PrintWriter writer=resp.getWriter();
+        List<Object> list = userGoodsDao.approvePassword(username, password);
+        if (list.size()>=1){
             PrintWriter out = resp.getWriter();
-            out.println("<script type='text/javascript'>alert('注册成功');location.href='Login.jsp';</script>");
+            out.println("<script type='text/javascript'>alert('用户名已被占用请重新填写用户名');location.href='Register.jsp';</script>");
+        }else {
+            User use=new User(username,password,sex,hobbys,phone,email,addrs);
+            int row=userGoodsDao.insertUser(use);
+            if(row>0){
+//           PrintWriter writer=resp.getWriter();
+                PrintWriter out = resp.getWriter();
+                out.println("<script type='text/javascript'>alert('注册成功');location.href='Login.jsp';</script>");
+            }
         }
+
 
 
     }

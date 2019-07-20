@@ -60,18 +60,17 @@ public class UserGoodsDao {
 
 
             String[] hoddys=use.getHobbys();
+            String interet="";
             StringBuffer sb=new StringBuffer();
-            if(hoddys.length>0){
+            if(hoddys!=null && hoddys.length>0){
                 for(int i=0;i<hoddys.length-1;i++){
                     sb.append(hoddys[i]+",");
 
                 }
+                interet = sb.toString();
+            }else {
+                interet="";
             }
-            if (sb.length()>=2){
-                sb.deleteCharAt(sb.length()-1);
-            }
-
-            String interet = sb.toString();
             paramlist.add(interet);
 
 
@@ -108,7 +107,7 @@ public class UserGoodsDao {
             }
             return 0;
         }
-        @Test
+        //查询商品
         public List<Goods> findByGoods(Goods goods){
         Connection con=null;
         PreparedStatement par=null;
@@ -117,9 +116,38 @@ public class UserGoodsDao {
             try {
                 con=this.getconnection();
                 StringBuffer sb=new StringBuffer();
-                sb.append("select * from goodsinfo");
+                sb.append("select * from goodsinfo where 1=1 ");
                 List<Object> paramlist=new ArrayList<>();
+                if(goods!=null){
+                    if (goods.getGoodsinfo_name()!=null){
+                        sb.append("and goodsinfo_name=?");
+                        paramlist.add(goods.getGoodsinfo_name());
+                    }if(goods.getGoodsinfo_pic()!=null){
+                        sb.append("and goodsinfo_pic=?");
+                        paramlist.add(goods.getGoodsinfo_pic());
+                    }
+                    if(goods.getGoodsinfo_price()!=null){
+                        sb.append("goodsinfo_price=?");
+                        paramlist.add(goods.getGoodsinfo_price());
+                    }
+                    if(goods.getGoodsinfo_descri()!=null){
+                        sb.append("goodsinfo_descri=?");
+                        paramlist.add(goods.getGoodsinfo_descri());
+                    }if(goods.getGoodsinfo_stock()!=0){
+                        sb.append("goodsinfo_stock=?");
+                        paramlist.add(goods.getGoodsinfo_stock());
+                    }if(goods.getId()!=0){
+                        sb.append("and id=?");
+                        paramlist.add(goods.getId());
+                    }
+                }
+
                 par=con.prepareStatement(sb.toString());
+                if(paramlist!=null && paramlist.size()>0){
+                    for (int i=1;i<=paramlist.size();i++){
+                        par.setObject(i,paramlist.get(i-1));
+                    }
+                }
                 rs=par.executeQuery();
                 while (rs.next()){
                     Goods goods1=new Goods();
@@ -138,6 +166,8 @@ public class UserGoodsDao {
             }
             return list;
         }
+
+        //验证密码；
         public List<Object> approvePassword(String username,String password){
         Connection con=null;
         PreparedStatement par=null;
@@ -165,5 +195,55 @@ public class UserGoodsDao {
             }
             return list;
         }
+
+        public int inertGoods(Goods goods){
+//            private String goodsinfo_name;
+//            private String goodsinfo_pic;
+//            private String goodsinfo_price;
+//            private String goodsinfo_descri;//描述
+//            private int goodsinfo_stock;//库存
+            String sql="insert into goodsinfo(goodsinfo_name,goodsinfo_pic,goodsinfo_price,goodsinfo_descri,goodsinfo_stock) value(?,?,?,?,?)";
+                List<Object> paramtlist=new ArrayList<>();
+                paramtlist.add(goods.getGoodsinfo_name());
+                paramtlist.add(goods.getGoodsinfo_pic());
+                paramtlist.add(goods.getGoodsinfo_price());
+                paramtlist.add(goods.getGoodsinfo_descri());
+                paramtlist.add(goods.getGoodsinfo_stock());
+                return this.executeupdate(sql,paramtlist);
+        }
+        //修改商品所有
+        public int UpdateGoods(Goods goods){
+            String sql="update goodsinfo set goodsinfo_name=?,goodsinfo_price=?,goodsinfo_descri=?,goodsinfo_stock=? where id='"+goods.getId()+"'";
+            List<Object> paramlist=new ArrayList<>();
+            //paramlist.add(goods.getGoodsinfo_pic());
+            paramlist.add(goods.getGoodsinfo_name());
+            paramlist.add(goods.getGoodsinfo_price());
+            paramlist.add(goods.getGoodsinfo_descri());
+            paramlist.add(goods.getGoodsinfo_stock());
+            //paramlist.add(goods.getId());
+
+            return executeupdate(sql,paramlist);
+        }
+        //删除商品
+        public int DeleteGoods(Goods goods){
+        Connection conn=null;
+        PreparedStatement par=null;
+        ResultSet rs=null;
+            try {
+                conn=this.getconnection();
+                String sql="delete from goodsinfo where goodsinfo_name=?";
+                par=conn.prepareStatement(sql);
+                par.setObject(1,goods.getGoodsinfo_name());
+                int i = par.executeUpdate();
+                return i;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                this.CloseAll(conn,par,rs);
+            }
+            return 0;
+        }
+
 
 }
